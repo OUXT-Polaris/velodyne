@@ -253,11 +253,12 @@ namespace velodyne_rawdata
           float focal_slope = corrections.focal_slope;
           intensity += focal_slope * (abs(focal_offset - 256 * 
             (1 - static_cast<float>(tmp.uint)/65535)*(1 - static_cast<float>(tmp.uint)/65535)));
-          intensity = (intensity < min_intensity) ? min_intensity : intensity;
-          intensity = (intensity > max_intensity) ? max_intensity : intensity;
-  
-          if (pointInRange(distance)) {
-  
+
+          bool intensity_in_range = ((intensity >= min_intensity) &&
+                                     (intensity <= max_intensity));
+
+          if (pointInRange(distance) && intensity_in_range) {
+
             // convert polar coordinates to Euclidean XYZ
             VPoint point;
             point.ring = corrections.laser_ring;
@@ -419,23 +420,24 @@ namespace velodyne_rawdata
             float z_coord = z;
     
             /** Intensity Calculation */
-    
+
             float min_intensity = corrections.min_intensity;
             float max_intensity = corrections.max_intensity;
-    
+
             intensity = raw->blocks[block].data[k+2];
-    
+
             float focal_offset = 256 
                                * (1 - corrections.focal_distance / 13100) 
                                * (1 - corrections.focal_distance / 13100);
             float focal_slope = corrections.focal_slope;
             intensity += focal_slope * (abs(focal_offset - 256 * 
               (1 - tmp.uint/65535)*(1 - tmp.uint/65535)));
-            intensity = (intensity < min_intensity) ? min_intensity : intensity;
-            intensity = (intensity > max_intensity) ? max_intensity : intensity;
-    
-            if (pointInRange(distance)) {
-    
+
+            bool intensity_in_range = ((intensity >= min_intensity) &&
+                                       (intensity <= max_intensity));
+
+            if (pointInRange(distance) && intensity_in_range) {
+
               // convert polar coordinates to Euclidean XYZ
               VPoint point;
               point.ring = corrections.laser_ring;
