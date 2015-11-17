@@ -43,9 +43,9 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
       packet_rate = 3472.17;            // 1333312 / 384
       model_full_name = std::string("HDL-") + config_.model;
     }
- 　else if (config_.model == "64E_S3")
+  else if (config_.model == "64E_S3")
     {
-      packet_rate = 5800.0;　// experimental
+      packet_rate = 5800.0; // experimental
       model_full_name = std::string("HDL-") + config_.model;
     }
   else if (config_.model == "64E")
