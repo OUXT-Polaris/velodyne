@@ -54,7 +54,10 @@ private:
     std::string model;               ///< device model name
     int    npackets;                 ///< number of packets to collect
     double rpm;                      ///< device rotation rate (RPMs)
-    int cut_angle;                   ///< cutting angle in 1/100°
+    //int cut_angle;                 ///< cutting angle in 1/100°
+    int cut_start_angle;             ///< cutting angle in 1/100°
+    int cut_end_angle;               ///< cutting angle in 1/100°
+    bool cut_enable;
     double time_offset;              ///< time in seconds added to each velodyne time stamp
   } config_;
 

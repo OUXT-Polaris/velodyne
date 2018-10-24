@@ -88,27 +88,49 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
   std::string dump_file;
   private_nh.param("pcap", dump_file, std::string(""));
 
-  double cut_angle;
-  private_nh.param("cut_angle", cut_angle, -0.01);
-  if (cut_angle < 0.0)
+  bool cut_enable;
+  private_nh.param("cut_enable", cut_enable, false);
+  config_.cut_enable = cut_enable;
+
+  double cut_start_angle;
+  private_nh.param("cut_angle", cut_start_angle, -0.01);
+  if (cut_start_angle < 0.0)
   {
     ROS_INFO_STREAM("Cut at specific angle feature deactivated.");
   }
-  else if (cut_angle < (2*M_PI))
+  else if (cut_start_angle < (2*M_PI))
   {
       ROS_INFO_STREAM("Cut at specific angle feature activated. " 
-        "Cutting velodyne points always at " << cut_angle << " rad.");
+        "Cutting velodyne points always at " << cut_start_angle << " rad.");
   }
   else
   {
-    ROS_ERROR_STREAM("cut_angle parameter is out of range. Allowed range is "
+    ROS_ERROR_STREAM("cut_start_angle parameter is out of range. Allowed range is "
     << "between 0.0 and 2*PI or negative values to deactivate this feature.");
-    cut_angle = -0.01;
+    cut_start_angle = -0.01;
+  }
+
+  double cut_end_angle;
+  private_nh.param("cut_angle", cut_end_angle, -0.01);
+  if (cut_end_angle < 0.0)
+  {
+    ROS_INFO_STREAM("Cut at specific angle feature deactivated.");
+  }
+  else if (cut_end_angle < (2*M_PI))
+  {
+      ROS_INFO_STREAM("Cut at specific angle feature activated. " 
+        "Cutting velodyne points always at " << cut_end_angle << " rad.");
+  }
+  else
+  {
+    ROS_ERROR_STREAM("cut_end_angle parameter is out of range. Allowed range is "
+    << "between 0.0 and 2*PI or negative values to deactivate this feature.");
+    cut_end_angle = -0.01;
   }
 
   // Convert cut_angle from radian to one-hundredth degree, 
   // which is used in velodyne packets
-  config_.cut_angle = int((cut_angle*360/(2*M_PI))*100);
+  config_.cut_start_angle = int((cut_start_angle*360/(2*M_PI))*100);
 
   int udp_port;
   private_nh.param("port", udp_port, (int) DATA_PORT_NUMBER);
@@ -162,7 +184,7 @@ bool VelodyneDriver::poll(void)
   // Allocate a new shared pointer for zero-copy sharing with other nodelets.
   velodyne_msgs::VelodyneScanPtr scan(new velodyne_msgs::VelodyneScan);
 
-  if( config_.cut_angle >= 0) //Cut at specific angle feature enabled
+  if( config_.cut_enable) //Cut at specific angle feature enabled
   {
     scan->packets.reserve(config_.npackets);
     velodyne_msgs::VelodynePacket tmp_packet;
@@ -174,25 +196,28 @@ bool VelodyneDriver::poll(void)
         if (rc == 0) break;       // got a full packet?
         if (rc < 0) return false; // end of file reached?
       }
-      scan->packets.push_back(tmp_packet);
-
-      static int last_azimuth = -1;
+      //static int last_azimuth = -1;
       // Extract base rotation of first block in packet
       std::size_t azimuth_data_pos = 100*0+2;
       int azimuth = *( (u_int16_t*) (&tmp_packet.data[azimuth_data_pos]));
-
-      // Handle overflow 35999->0
-      if(azimuth<last_azimuth)
-        last_azimuth-=36000;
-      // Check if currently passing cut angle
-      if(   last_azimuth != -1
-         && last_azimuth < config_.cut_angle
-         && azimuth >= config_.cut_angle )
+      if(config_.cut_end_angle > config_.cut_start_angle)
       {
-        last_azimuth = azimuth;
-        break; // Cut angle passed, one full revolution collected
+        if(config_.cut_start_angle <= azimuth && azimuth <= config_.cut_end_angle)
+        {
+          scan->packets.push_back(tmp_packet);
+        }
       }
-      last_azimuth = azimuth;
+      else
+      {
+        if(config_.cut_start_angle <= azimuth && azimuth<= 35999)
+        {
+          scan->packets.push_back(tmp_packet);
+        }
+        else if(0 <= azimuth && azimuth <= config_.cut_end_angle)
+        {
+          scan->packets.push_back(tmp_packet);
+        }
+      }
     }
   }
   else // standard behaviour
