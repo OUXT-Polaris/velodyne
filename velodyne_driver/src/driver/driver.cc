@@ -93,7 +93,7 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
   config_.cut_enable = cut_enable;
 
   double cut_start_angle;
-  private_nh.param("cut_angle", cut_start_angle, -0.01);
+  private_nh.param("cut_start_angle", cut_start_angle, -0.01);
   if (cut_start_angle < 0.0)
   {
     ROS_INFO_STREAM("Cut at specific angle feature deactivated.");
@@ -111,7 +111,7 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
   }
 
   double cut_end_angle;
-  private_nh.param("cut_angle", cut_end_angle, -0.01);
+  private_nh.param("cut_end_angle", cut_end_angle, -0.01);
   if (cut_end_angle < 0.0)
   {
     ROS_INFO_STREAM("Cut at specific angle feature deactivated.");
@@ -131,6 +131,7 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
   // Convert cut_angle from radian to one-hundredth degree, 
   // which is used in velodyne packets
   config_.cut_start_angle = int((cut_start_angle*360/(2*M_PI))*100);
+  config_.cut_end_angle = int((cut_end_angle*360/(2*M_PI))*100);
 
   int udp_port;
   private_nh.param("port", udp_port, (int) DATA_PORT_NUMBER);
