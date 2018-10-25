@@ -37,10 +37,20 @@ void packets_filter::init()
 
 void packets_filter::packets_callback_(const velodyne_msgs::VelodyneScan::ConstPtr msg)
 {
+    velodyne_msgs::VelodyneScan publish_packets;
+    publish_packets.header = msg->header;
     for(auto packet_itr = msg->packets.begin(); packet_itr != msg->packets.end(); packet_itr++)
     {
         std::size_t azimuth_data_pos = 100*0+2;
         int azimuth = *( (u_int16_t*) (&packet_itr->data[azimuth_data_pos]));
+        if(cut_start_angle_ < cut_end_angle_)
+        {
+            if(cut_start_angle_ <= azimuth && azimuth <= cut_end_angle_)
+            {
+                publish_packets.packets.push_back(*packet_itr);
+            }
+        }
     }
+    packets_pub_.publish(publish_packets);
     return;
 }
