@@ -1,3 +1,13 @@
+<library path="lib/libpackets_filter_nodelet">
+  <class name="velodyne_driver/PacketsFilterNodelet"
+         type="velodyne_driver::PacketsFilterNodelet"
+         base_class_type="nodelet::Nodelet">
+    <description> 
+      Filter raw Velodyne data packets.
+    </description>
+  </class>
+</library>
+
 <library path="lib/libdriver_nodelet">
   <class name="velodyne_driver/DriverNodelet"
          type="velodyne_driver::DriverNodelet"
