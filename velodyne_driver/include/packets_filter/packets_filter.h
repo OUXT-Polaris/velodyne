@@ -13,6 +13,7 @@ class packets_filter
     private:
         ros::NodeHandle nh_;
         std::string input_topic_;
+        int cut_start_angle_,cut_end_angle_;
         ros::Subscriber packets_sub_;
         std::string output_topic_;
         ros::Publisher packets_pub_;
