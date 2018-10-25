@@ -10,11 +10,11 @@ class packets_filter
         packets_filter();
         ~packets_filter();
         void init();
-        void subscribe();
-        void unsubscribe();
     private:
         ros::NodeHandle nh_;
+        std::string input_topic_;
         ros::Subscriber packets_sub_;
+        std::string output_topic_;
         ros::Publisher packets_pub_;
         void packets_callback_(const velodyne_msgs::VelodyneScan::ConstPtr msg);
 };
