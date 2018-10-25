@@ -28,8 +28,8 @@ void packets_filter::init(ros::NodeHandle nh,ros::NodeHandle private_nh)
         cut_end_angle_d = 0;
     }
     private_nh.param<double>("cut_end_angle",cut_end_angle_d,0);
-    cut_start_angle_ = (int)(100 * cut_start_angle_d);
-    cut_end_angle_ = (int)(100*cut_end_angle_d);
+    cut_start_angle_ = int((cut_start_angle_d*360/(2*M_PI))*100);
+    cut_end_angle_ = int((cut_end_angle_d*360/(2*M_PI))*100);
     packets_pub_ = nh_.advertise<velodyne_msgs::VelodyneScan>(output_topic_,10);
     packets_sub_ = nh_.subscribe(input_topic_,10,&packets_filter::packets_callback_,this);
     return;
