@@ -36,7 +36,7 @@
     <param name="cut_end_angle" value="$(arg cut_end_angle)"/>
   </node>    
 
-  <!-- load driver nodelet into it -->
+  <!-- load packets filter nodelet into it -->
   <node pkg="nodelet" type="nodelet" name="$(arg manager)_packets_filter"
         args="load velodyne_driver/PacketsFilterNodelet $(arg manager)" >
   </node>  

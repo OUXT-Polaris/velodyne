@@ -12,7 +12,8 @@ namespace velodyne_driver
         ~PacketsFilterNodelet(){};
         virtual void onInit()
         {
-            filter_.init();
+            ros::NodeHandle private_nh = getPrivateNodeHandle();
+            filter_.init(private_nh);
         };
     private:
         packets_filter filter_;

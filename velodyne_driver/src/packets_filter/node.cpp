@@ -5,7 +5,8 @@ int main(int argc, char** argv)
 {
   ros::init(argc, argv, "velodyne_node");
   packets_filter filter;
-  filter.init();
+  ros::NodeHandle pnh("~");
+  filter.init(pnh);
   ros::spin();
   return 0;
 }
