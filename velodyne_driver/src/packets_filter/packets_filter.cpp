@@ -50,6 +50,17 @@ void packets_filter::packets_callback_(const velodyne_msgs::VelodyneScan::ConstP
                 publish_packets.packets.push_back(*packet_itr);
             }
         }
+        else
+        {
+            if(cut_start_angle_ <= azimuth && azimuth <= 35999)
+            {
+                publish_packets.packets.push_back(*packet_itr);
+            }
+            else if(0 <= azimuth && azimuth <= cut_end_angle_)
+            {
+                publish_packets.packets.push_back(*packet_itr);
+            }
+        }
     }
     packets_pub_.publish(publish_packets);
     return;
