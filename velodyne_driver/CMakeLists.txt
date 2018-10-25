@@ -30,6 +30,7 @@ catkin_package(CATKIN_DEPENDS ${${PROJECT_NAME}_CATKIN_DEPS}
 # compile the driver and input library
 add_subdirectory(src/lib)
 add_subdirectory(src/driver)
+add_subdirectory(src/packets_filter)
 
 install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
