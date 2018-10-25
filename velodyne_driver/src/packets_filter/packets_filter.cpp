@@ -13,7 +13,6 @@ packets_filter::~packets_filter()
 void packets_filter::init(ros::NodeHandle nh,ros::NodeHandle private_nh)
 {
     nh_ = nh;
-    //private_nh.getParam("input_topic",input_topic_);
     private_nh.param<std::string>("input_topic",input_topic_,ros::this_node::getName()+"/raw_packets");
     private_nh.param<std::string>("output_topic",output_topic_,ros::this_node::getName()+"/filtered_packets");
     double cut_start_angle_d,cut_end_angle_d;
@@ -32,7 +31,6 @@ void packets_filter::init(ros::NodeHandle nh,ros::NodeHandle private_nh)
     cut_start_angle_ = (int)(100 * cut_start_angle_d);
     cut_end_angle_ = (int)(100*cut_end_angle_d);
     packets_pub_ = nh_.advertise<velodyne_msgs::VelodyneScan>(output_topic_,10);
-    ROS_ERROR_STREAM(input_topic_);
     packets_sub_ = nh_.subscribe(input_topic_,10,&packets_filter::packets_callback_,this);
     return;
 }

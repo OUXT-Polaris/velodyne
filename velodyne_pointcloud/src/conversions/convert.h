@@ -47,6 +47,7 @@ namespace velodyne_pointcloud
     boost::shared_ptr<velodyne_rawdata::RawData> data_;
     ros::Subscriber velodyne_scan_;
     ros::Publisher output_;
+    std::string input_topic_;
 
     /// configuration parameters
     typedef struct {
