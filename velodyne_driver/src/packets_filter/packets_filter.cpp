@@ -22,5 +22,9 @@ void packets_filter::init()
 
 void packets_filter::packets_callback_(const velodyne_msgs::VelodyneScan::ConstPtr msg)
 {
+    for(auto packet_itr = msg->packets.begin(); packet_itr != msg->packets.end(); packet_itr++)
+    {
+
+    }
     return;
 }
