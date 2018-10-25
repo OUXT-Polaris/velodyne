@@ -9,7 +9,7 @@ class packets_filter
     public:
         packets_filter();
         ~packets_filter();
-        void init(ros::NodeHandle private_nh);
+        void init(ros::NodeHandle nh,ros::NodeHandle private_nh);
     private:
         ros::NodeHandle nh_;
         std::string input_topic_;

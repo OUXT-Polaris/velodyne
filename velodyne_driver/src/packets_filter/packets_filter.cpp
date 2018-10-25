@@ -10,11 +10,11 @@ packets_filter::~packets_filter()
 
 }
 
-void packets_filter::init(ros::NodeHandle private_nh)
+void packets_filter::init(ros::NodeHandle nh,ros::NodeHandle private_nh)
 {
-    // = getPrivateNodeHandle();
-    private_nh.getParam("input_topic",input_topic_);
-    //private_nh.param<std::string>("input_topic",input_topic_,ros::this_node::getName()+"/raw_packets");
+    nh_ = nh;
+    //private_nh.getParam("input_topic",input_topic_);
+    private_nh.param<std::string>("input_topic",input_topic_,ros::this_node::getName()+"/raw_packets");
     private_nh.param<std::string>("output_topic",output_topic_,ros::this_node::getName()+"/filtered_packets");
     double cut_start_angle_d,cut_end_angle_d;
     private_nh.param<double>("cut_start_angle",cut_start_angle_d,0);
