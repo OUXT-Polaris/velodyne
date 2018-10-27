@@ -13,7 +13,7 @@
 */
 
 #include <ros/ros.h>
-#include "velodyne_pointcloud/transform.h"
+#include "transform.h"
 
 /** Main node entry point. */
 int main(int argc, char **argv)

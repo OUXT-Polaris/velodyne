@@ -18,7 +18,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <nodelet/nodelet.h>
 
-#include "velodyne_driver/driver.h"
+#include "driver.h"
 
 namespace velodyne_driver
 {

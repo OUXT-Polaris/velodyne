@@ -14,7 +14,7 @@
 */
 
 #include <ros/ros.h>
-#include "velodyne_pointcloud/colors.h"
+#include "colors.h"
 
 /** Main node entry point. */
 int main(int argc, char **argv)

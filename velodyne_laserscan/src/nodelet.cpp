@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <pluginlib/class_list_macros.h>
 #include <nodelet/nodelet.h>
-#include "velodyne_laserscan/VelodyneLaserScan.h"
+#include "VelodyneLaserScan.h"
 
 namespace velodyne_laserscan
 {

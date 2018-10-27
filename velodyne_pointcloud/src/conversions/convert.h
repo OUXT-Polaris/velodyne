@@ -21,7 +21,6 @@
 
 #include <sensor_msgs/PointCloud2.h>
 #include <velodyne_pointcloud/rawdata.h>
-#include <velodyne_pointcloud/pointcloudXYZIR.h>
 
 #include <dynamic_reconfigure/server.h>
 #include <velodyne_pointcloud/CloudNodeConfig.h>
@@ -53,7 +52,7 @@ namespace velodyne_pointcloud
     typedef struct {
       int npackets;                    ///< number of packets to combine
     } Config;
-    Config config_;    
+    Config config_;
   };
 
 } // namespace velodyne_pointcloud
