@@ -17,7 +17,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <nodelet/nodelet.h>
 
-#include "velodyne_pointcloud/colors.h"
+#include "colors.h"
 
 namespace velodyne_pointcloud
 {

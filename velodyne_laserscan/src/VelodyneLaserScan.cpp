@@ -1,4 +1,4 @@
-#include "velodyne_laserscan/VelodyneLaserScan.h"
+#include "VelodyneLaserScan.h"
 #include <sensor_msgs/point_cloud2_iterator.h>
 
 namespace velodyne_laserscan {

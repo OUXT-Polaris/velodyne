@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include "velodyne_laserscan/VelodyneLaserScan.h"
+#include "VelodyneLaserScan.h"
 
 int main(int argc, char** argv)
 {
