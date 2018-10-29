@@ -1,6 +1,8 @@
 Autoware's Velodyne Driver Subtree
 ==================================
 
+[![Build Status](https://travis-ci.org/CPFL/velodyne.svg?branch=Autoware)](https://travis-ci.org/CPFL/velodyne/)
+
 This directory is part of a subtree fetched from https://github.com/CPFL/velodyne on the **Autoware** branch, a fork from the original https://github.com/ros-drivers/velodyne
 
 This repo adds support to HDL-64 S3 and creates the launch files used by Autoware.
@@ -24,8 +26,6 @@ If you made any modification to the subtree you are encouraged to commit and pub
 **Original README from https://github.com/ros-drivers/velodyne**
 
 ---
-
-[![Build Status](https://travis-ci.org/ros-drivers/velodyne.svg?branch=master)](https://travis-ci.org/ros-drivers/velodyne)
 
 
 Overview
