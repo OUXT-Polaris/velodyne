@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Autoware's Velodyne Driver Subtree
 ==================================
 
@@ -25,14 +24,13 @@ If you made any modification to the subtree you are encouraged to commit and pub
 **Original README from https://github.com/ros-drivers/velodyne**
 
 ---
-=======
+
 [![Build Status](https://travis-ci.org/ros-drivers/velodyne.svg?branch=master)](https://travis-ci.org/ros-drivers/velodyne)
->>>>>>> master
+
 
 Overview
 ========
 
-<<<<<<< HEAD
 Velodyne_ is a collection of ROS_ packages supporting `Velodyne high
 definition 3D LIDARs`_ .
 
@@ -67,4 +65,3 @@ testing has not been completed in those environments.
 - <sup>1</sup>ROS: http://www.ros.org
 - <sup>2</sup>Velodyne: http://www.ros.org/wiki/velodyne
 - <sup>3</sup>`Velodyne high definition 3D LIDARs`: http://www.velodynelidar.com/lidar/lidar.aspx
->>>>>>> master
