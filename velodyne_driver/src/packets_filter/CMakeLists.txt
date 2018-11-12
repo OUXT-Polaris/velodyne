@@ -1,13 +1,13 @@
 # build the driver node
 add_executable(packets_filter_node node.cpp packets_filter.cpp)
-#add_dependencies(packets_filter_node velodyne_driver_gencfg)
+add_dependencies(packets_filter_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(packets_filter_node
   ${catkin_LIBRARIES}
 )
 
 # build the nodelet version
 add_library(packets_filter_nodelet nodelet.cpp packets_filter.cpp)
-#add_dependencies(packets_filter_nodelet velodyne_driver_gencfg)
+add_dependencies(packets_filter_nodelet ${catkin_EXPORTED_TARGETS})
 target_link_libraries(packets_filter_nodelet
   ${catkin_LIBRARIES}
 )
