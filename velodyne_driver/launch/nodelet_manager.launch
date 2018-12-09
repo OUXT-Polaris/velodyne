@@ -13,8 +13,8 @@
   <arg name="read_once" default="false" />
   <arg name="repeat_delay" default="0.0" />
   <arg name="rpm" default="600.0" />
-  <arg name="cut_start_angle" default="-0.01" />
-  <arg name="cut_end_angle" default="-0.01" />
+  <arg name="cut_start_angle" default="1.57" />
+  <arg name="cut_end_angle" default="-1.57" />
   <arg name="cut_enable" default="true"/>
 
   <!-- start nodelet manager -->
