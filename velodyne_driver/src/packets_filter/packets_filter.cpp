@@ -13,8 +13,7 @@ packets_filter::~packets_filter()
 void packets_filter::init(ros::NodeHandle nh,ros::NodeHandle private_nh)
 {
     nh_ = nh;
-    private_nh.param<std::string>("input_topic",input_topic_,ros::this_node::getName()+"/raw_packets");
-    private_nh.param<std::string>("output_topic",output_topic_,ros::this_node::getName()+"/filtered_packets");
+    private_nh.param<std::string>("input_topic",input_topic_,"velodyne_packets");
     double cut_start_angle_d,cut_end_angle_d;
     private_nh.param<double>("cut_start_angle",cut_start_angle_d,0);
     if(cut_start_angle_d < -1*M_PI || cut_start_angle_d > M_PI)
@@ -30,7 +29,7 @@ void packets_filter::init(ros::NodeHandle nh,ros::NodeHandle private_nh)
     private_nh.param<double>("cut_end_angle",cut_end_angle_d,0);
     cut_start_angle_ = int(((cut_start_angle_d + M_PI)*360/(2*M_PI))*100);
     cut_end_angle_ = int(((cut_end_angle_d + M_PI)*360/(2*M_PI))*100);
-    packets_pub_ = nh_.advertise<velodyne_msgs::VelodyneScan>(output_topic_,10);
+    packets_pub_ = nh_.advertise<velodyne_msgs::VelodyneScan>("velodyne_packets/filtered", 10);
     packets_sub_ = nh_.subscribe(input_topic_,10,&packets_filter::packets_callback_,this);
     return;
 }

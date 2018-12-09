@@ -32,12 +32,12 @@
     <param name="read_once" value="$(arg read_once)"/>
     <param name="repeat_delay" value="$(arg repeat_delay)"/>
     <param name="rpm" value="$(arg rpm)"/>
-    <param name="cut_start_angle" value="$(arg cut_start_angle)"/>
-    <param name="cut_end_angle" value="$(arg cut_end_angle)"/>
   </node>    
 
   <!-- load packets filter nodelet into it -->
   <node pkg="nodelet" type="nodelet" name="$(arg manager)_packets_filter"
         args="load velodyne_driver/PacketsFilterNodelet $(arg manager)" >
+    <param name="cut_start_angle" value="$(arg cut_start_angle)"/>
+    <param name="cut_end_angle" value="$(arg cut_end_angle)"/>
   </node>  
 </launch>

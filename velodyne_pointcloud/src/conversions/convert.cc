@@ -37,7 +37,7 @@ namespace velodyne_pointcloud
     f = boost::bind (&Convert::callback, this, _1, _2);
     srv_->setCallback (f);
 
-    private_nh.param<std::string>("input_topic",input_topic_,"velodyne_packets");
+    private_nh.param<std::string>("input_topic",input_topic_,"velodyne_packets/filtered");
 
     // subscribe to VelodyneScan packets
     velodyne_scan_ =
